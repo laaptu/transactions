@@ -1,6 +1,6 @@
 package au.commbank.codingchallenge.common.di.modules
 
-import au.commbank.codingchallenge.screens.account.domain.AccountApiService
+import au.commbank.codingchallenge.screens.account.data.AccountApiService
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit

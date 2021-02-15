@@ -12,7 +12,7 @@ class AccountInfoItem(
 class DateItem(
         id: String,
         val date: String,
-        val dateDiff: String
+        val dateDiff: DateDiff
 ) : ListItem(id)
 
 class TransactionItem(
@@ -23,3 +23,11 @@ class TransactionItem(
         val isPending: Boolean = false,
         val atmLocationId: String? = null
 ) : ListItem(id)
+
+
+sealed class DateDiff {
+    class Day(val days: Long) : DateDiff()
+    class Month(val months: Long) : DateDiff()
+    class Year(val years: Long) : DateDiff()
+    object Invalid : DateDiff()
+}

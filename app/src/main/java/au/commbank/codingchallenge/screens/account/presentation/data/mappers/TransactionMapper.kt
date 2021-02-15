@@ -1,9 +1,10 @@
-package au.commbank.codingchallenge.screens.account.presentation.data
+package au.commbank.codingchallenge.screens.account.presentation.data.mappers
 
 import au.commbank.codingchallenge.common.Logger
 import au.commbank.codingchallenge.config.NetworkConfig.dateFormat
 import au.commbank.codingchallenge.screens.account.Utils.getTimeInMillisFromDate
-import au.commbank.codingchallenge.screens.account.domain.data.Transaction
+import au.commbank.codingchallenge.screens.account.data.Transaction
+import au.commbank.codingchallenge.screens.account.presentation.data.TransactionItem
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton

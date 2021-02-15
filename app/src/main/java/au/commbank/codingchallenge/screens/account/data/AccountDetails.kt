@@ -1,4 +1,4 @@
-package au.commbank.codingchallenge.screens.account.domain.data
+package au.commbank.codingchallenge.screens.account.data
 
 import com.google.gson.annotations.SerializedName
 
