@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="au.commbank.codingchallenge">
-
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:name=".MainApplication"
         android:allowBackup="true"
@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".screens.account.AccountDetailActivity">
+        <activity android:name=".screens.account.presentation.AccountDetailActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

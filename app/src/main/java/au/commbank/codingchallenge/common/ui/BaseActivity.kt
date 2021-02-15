@@ -13,9 +13,9 @@ import dagger.android.AndroidInjection
 abstract class BaseActivity : AppCompatActivity() {
 
     protected fun <T : ViewDataBinding> binding(@LayoutRes layoutId: Int): Lazy<T> =
-        lazy {
-            DataBindingUtil.setContentView<T>(this, layoutId)
-        }
+            lazy {
+                DataBindingUtil.setContentView<T>(this, layoutId)
+            }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,10 +24,10 @@ abstract class BaseActivity : AppCompatActivity() {
 
 
     fun initActionBar(
-        toolBar: Toolbar,
-        iconResId: Int = R.drawable.ic_app_icon,
-        titleText: String = getString(R.string.app_name),
-        homeAsUpEnabled: Boolean = false
+            toolBar: Toolbar,
+            iconResId: Int = R.drawable.ic_app_icon,
+            titleText: String = getString(R.string.app_name),
+            homeAsUpEnabled: Boolean = false
     ) {
         setSupportActionBar(toolBar)
         supportActionBar?.apply {

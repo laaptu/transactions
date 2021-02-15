@@ -5,6 +5,7 @@ object NetworkConfig {
     const val connectionTimeOutInSec = 30L
     const val readTimeOutInSec = 30L
     const val writeTimeOutInSec = 30L
+    const val dateFormat = "dd/MM/yyyy"
 }
 
 object Urls {

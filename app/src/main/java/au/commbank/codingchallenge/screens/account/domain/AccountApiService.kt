@@ -1,7 +1,7 @@
-package au.commbank.codingchallenge.screens.account
+package au.commbank.codingchallenge.screens.account.domain
 
 import au.commbank.codingchallenge.config.Urls
-import au.commbank.codingchallenge.screens.location.AccountDetails
+import au.commbank.codingchallenge.screens.account.domain.data.AccountDetails
 import retrofit2.http.GET
 
 interface AccountApiService {

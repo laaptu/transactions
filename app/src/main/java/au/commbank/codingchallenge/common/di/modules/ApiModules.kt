@@ -1,6 +1,6 @@
 package au.commbank.codingchallenge.common.di.modules
 
-import au.commbank.codingchallenge.screens.account.AccountApiService
+import au.commbank.codingchallenge.screens.account.domain.AccountApiService
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -11,5 +11,5 @@ class ApiModule {
     @Provides
     @Singleton
     fun getAccountApiService(retrofit: Retrofit): AccountApiService =
-        retrofit.create(AccountApiService::class.java)
+            retrofit.create(AccountApiService::class.java)
 }

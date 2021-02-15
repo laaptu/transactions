@@ -11,8 +11,8 @@ class AtmLocationActivity : BaseActivity() {
         setContentView(R.layout.activity_account_detail)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         initActionBar(toolBar = toolbar,
-        titleText = "Find us",
-        homeAsUpEnabled = true)
+                titleText = "Find us",
+                homeAsUpEnabled = true)
 
 
     }

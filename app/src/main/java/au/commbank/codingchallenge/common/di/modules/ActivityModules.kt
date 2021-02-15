@@ -1,6 +1,6 @@
 package au.commbank.codingchallenge.common.di.modules
 
-import au.commbank.codingchallenge.screens.account.AccountDetailActivity
+import au.commbank.codingchallenge.screens.account.presentation.AccountDetailActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
