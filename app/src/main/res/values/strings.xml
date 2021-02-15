@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Commbank</string>
+    <string name="account_details">Account details</string>
+    <string name="find_us">Find us</string>
 </resources>
