@@ -4,4 +4,6 @@
     <string name="find_us">Find us</string>
 
     <string name="error_fetching_transactions">Error fetching transactions.Try again later.</string>
+    <string name="account_balance">Account balance</string>
+    <string name="available_funds">Available funds</string>
 </resources>

@@ -13,13 +13,13 @@ class AccountDetailActivity : ViewModelActivity<AccountDetailViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_account_detail)
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        initActionBar(
-                toolBar = toolbar,
-                titleText = getString(R.string.account_details),
-        )
-        viewModel.fetchAccountDetail()
+        setContentView(R.layout.account_info_item)
+//        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+//        initActionBar(
+//                toolBar = toolbar,
+//                titleText = getString(R.string.account_details),
+//        )
+        //viewModel.fetchAccountDetail()
 
     }
 }
