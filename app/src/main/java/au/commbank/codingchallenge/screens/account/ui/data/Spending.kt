@@ -1,4 +1,4 @@
-package au.commbank.codingchallenge.screens.account.presentation.data
+package au.commbank.codingchallenge.screens.account.ui.data
 
 import au.commbank.codingchallenge.config.NetworkConfig
 

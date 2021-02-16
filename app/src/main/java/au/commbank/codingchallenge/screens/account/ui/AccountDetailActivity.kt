@@ -1,4 +1,4 @@
-package au.commbank.codingchallenge.screens.account.presentation
+package au.commbank.codingchallenge.screens.account.ui
 
 import android.os.Bundle
 import androidx.activity.viewModels

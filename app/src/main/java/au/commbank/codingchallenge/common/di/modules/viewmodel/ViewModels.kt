@@ -1,7 +1,7 @@
 package au.commbank.codingchallenge.common.di.modules.viewmodel
 
 import androidx.lifecycle.ViewModel
-import au.commbank.codingchallenge.screens.account.presentation.AccountDetailViewModel
+import au.commbank.codingchallenge.screens.account.ui.AccountDetailViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

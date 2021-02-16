@@ -1,13 +1,13 @@
-package au.commbank.codingchallenge.screens.account.presentation.data.mappers
+package au.commbank.codingchallenge.screens.account.ui.data.mappers
 
 import au.commbank.codingchallenge.common.Logger
-import au.commbank.codingchallenge.config.NetworkConfig
-import au.commbank.codingchallenge.screens.account.Utils
-import au.commbank.codingchallenge.screens.account.Utils.getBiWeeklySpendingProjection
 import au.commbank.codingchallenge.screens.account.data.Account
 import au.commbank.codingchallenge.screens.account.data.AccountDetails
 import au.commbank.codingchallenge.screens.account.data.AtmLocation
-import au.commbank.codingchallenge.screens.account.presentation.data.*
+import au.commbank.codingchallenge.screens.account.ui.data.*
+import au.commbank.codingchallenge.screens.utils.getBiWeeklySpendingProjection
+import au.commbank.codingchallenge.screens.utils.getDisplayDate
+import au.commbank.codingchallenge.screens.utils.getTimeDiff
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.math.absoluteValue
@@ -20,7 +20,7 @@ class AccountDataMapper @Inject constructor(private val transactionMapper: Trans
         private val TAG = AccountDataMapper::class.java.simpleName
     }
 
-    fun mapAccountDetailToAccountUIData(accountDetails: AccountDetails): AccountUIData {
+    infix fun mapToAccountUIData(accountDetails: AccountDetails): AccountUIData {
         return with(accountDetails) {
             val listItems = mutableListOf<ListItem>()
             listItems.add(mapAccountToAccountInfoItem(account))
@@ -47,8 +47,8 @@ class AccountDataMapper @Inject constructor(private val transactionMapper: Trans
     private fun mapDateToDateItem(date: String): DateItem =
             DateItem(
                     id = date,
-                    date = date,
-                    dateDiff = Utils.getTimeDiff(date, NetworkConfig.dateFormat)
+                    displayDate = getDisplayDate(date),
+                    dateDiff = getTimeDiff(date)
             )
 
     private fun mapAccountToAccountInfoItem(account: Account): AccountInfoItem =

@@ -1,10 +1,9 @@
-package au.commbank.codingchallenge.screens.account.presentation.data.mappers
+package au.commbank.codingchallenge.screens.account.ui.data.mappers
 
 import au.commbank.codingchallenge.common.Logger
-import au.commbank.codingchallenge.config.NetworkConfig.dateFormat
-import au.commbank.codingchallenge.screens.account.Utils.getTimeInMillisFromDate
 import au.commbank.codingchallenge.screens.account.data.Transaction
-import au.commbank.codingchallenge.screens.account.presentation.data.TransactionItem
+import au.commbank.codingchallenge.screens.account.ui.data.TransactionItem
+import au.commbank.codingchallenge.screens.utils.getTimeInMillisFromDate
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -59,8 +58,8 @@ class TransactionMapper @Inject constructor(private val logger: Logger) : Compar
             }
 
     override fun compare(date1: String, date2: String): Int {
-        val timeInMillis1 = getTimeInMillisFromDate(date1, dateFormat, INVALID_TIME)
-        val timeInMillis2 = getTimeInMillisFromDate(date2, dateFormat, INVALID_TIME)
+        val timeInMillis1 = getTimeInMillisFromDate(date1, INVALID_TIME)
+        val timeInMillis2 = getTimeInMillisFromDate(date2, INVALID_TIME)
         if (timeInMillis1 == INVALID_TIME || timeInMillis2 == INVALID_TIME) {
             logger.error(
                     TAG,

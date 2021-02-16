@@ -2,4 +2,6 @@
     <string name="app_name">Commbank</string>
     <string name="account_details">Account details</string>
     <string name="find_us">Find us</string>
+
+    <string name="error_fetching_transactions">Error fetching transactions.Try again later.</string>
 </resources>
