@@ -4,12 +4,13 @@ import android.graphics.Typeface
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.StyleSpan
-import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import au.commbank.codingchallenge.R
 import au.commbank.codingchallenge.screens.account.ui.data.DateDiff
 import au.commbank.codingchallenge.screens.account.ui.data.DisplayAmount
+import au.commbank.codingchallenge.screens.account.ui.data.TransactionItem
 import au.commbank.codingchallenge.screens.utils.formatAmount
 import au.commbank.codingchallenge.screens.utils.getDisplayAmount
 
@@ -58,13 +59,32 @@ object ViewBindings {
     }
 
     @JvmStatic
-    @BindingAdapter(value = ["description", "isPendingTransaction"], requireAll = true)
-    fun displayTransactionDescription(
+    @BindingAdapter("displayTransactionItem")
+    fun displayTransactionItem(
+        textView: AppCompatTextView,
+        transactionItem: TransactionItem
+    ) {
+        displayDescription(textView, transactionItem.description, transactionItem.isPending)
+        setRightDrawable(textView, transactionItem.atmLocationId != null)
+    }
+
+    private fun setRightDrawable(
+        textView: AppCompatTextView,
+        setRightDrawable: Boolean
+    ) {
+        val rightDrawable = if (setRightDrawable)
+            ContextCompat.getDrawable(textView.context, R.drawable.ic_location)
+        else
+            null
+        textView.setCompoundDrawablesWithIntrinsicBounds(null, null, rightDrawable, null)
+    }
+
+    private fun displayDescription(
         textView: AppCompatTextView,
         description: String,
-        isPendingTransaction: Boolean
+        isPending: Boolean
     ) {
-        if (isPendingTransaction) {
+        if (isPending) {
             val pendingStr = textView.context.getString(R.string.pending)
             val len = pendingStr.length
             val spannableString = SpannableString(pendingStr.plus(" ").plus(description))
@@ -77,15 +97,6 @@ object ViewBindings {
         } else {
             textView.text = description
         }
-    }
-
-    @JvmStatic
-    @BindingAdapter("show")
-    fun showView(view: View, show: Boolean) {
-        if (show)
-            view.visibility = View.VISIBLE
-        else
-            view.visibility = View.GONE
     }
 
 }
