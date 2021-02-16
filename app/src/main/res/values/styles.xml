@@ -19,9 +19,13 @@
         <item name="android:textColor">@color/dark_grey</item>
     </style>
 
-    <style name="AppTextStyle.Date">
+
+    <style name="AppTextStyle.MidSizedBlack">
         <item name="android:textColor">@color/mild_black</item>
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="AppTextStyle.MidSizedBlack.Bold">
         <item name="android:textStyle">bold</item>
     </style>
 

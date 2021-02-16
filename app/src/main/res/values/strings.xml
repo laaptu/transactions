@@ -12,4 +12,5 @@
     <string name="trillion">%s T</string>
 
     <string name="today">Today</string>
+    <string name="pending">PENDING:</string>
 </resources>

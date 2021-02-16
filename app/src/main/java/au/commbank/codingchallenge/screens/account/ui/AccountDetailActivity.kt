@@ -13,13 +13,15 @@ class AccountDetailActivity : ViewModelActivity<AccountDetailViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.date_item)
-//        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-//        initActionBar(
-//                toolBar = toolbar,
-//                titleText = getString(R.string.account_details),
-//        )
+        setContentView(R.layout.activity_account_detail)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        initActionBar(
+                toolBar = toolbar,
+                titleText = getString(R.string.account_details),
+        )
         //viewModel.fetchAccountDetail()
+        val pending = getString(R.string.pending)
+        println("Pending length = ${pending.length}")
 
     }
 }
