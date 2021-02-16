@@ -2,6 +2,7 @@ package au.commbank.codingchallenge.screens.utils
 
 import au.commbank.codingchallenge.config.NetworkConfig
 import au.commbank.codingchallenge.screens.account.ui.data.DateDiff
+import au.commbank.codingchallenge.screens.account.ui.data.DisplayAmount
 import au.commbank.codingchallenge.screens.account.ui.data.Spending
 import java.text.SimpleDateFormat
 import java.util.*
@@ -26,6 +27,7 @@ fun getTimeInMillisFromDate(date: String, defaultReturn: Long): Long =
             defaultReturn
         }
 
+//TODO: need to account for leap year and accurate days in a month
 fun getTimeDiff(date: String): DateDiff {
     try {
         val currDate = Calendar.getInstance().time
@@ -53,6 +55,17 @@ fun getDisplayDate(date: String): String {
         uiDateFormat.format(givenDate)
     } catch (exception: Exception) {
         date
+    }
+}
+
+fun getDisplayAmount(amount: Float): DisplayAmount {
+    val mul = if (amount < 0) -1 else 1
+    val absAmount = abs(amount)
+    return when {
+        absAmount < 1e6f -> DisplayAmount.Thousands(amount)
+        absAmount < 1e9f -> DisplayAmount.Millions((absAmount / 1e6f) * mul)
+        absAmount < 1e12f -> DisplayAmount.Billions((absAmount / 1e9f) * mul)
+        else -> DisplayAmount.Trillions((absAmount / 1e12f) * mul)
     }
 }
 

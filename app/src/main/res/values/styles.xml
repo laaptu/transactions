@@ -17,7 +17,12 @@
         <item name="android:maxLines">1</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/dark_grey</item>
+    </style>
 
+    <style name="AppTextStyle.Date">
+        <item name="android:textColor">@color/mild_black</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>

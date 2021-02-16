@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="dateItem"
+            type="au.commbank.codingchallenge.screens.account.ui.data.DateItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@color/yellow">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtDate"
+            style="@style/AppTextStyle.Date"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/dp8"
+            android:layout_marginLeft="@dimen/dp8"
+            android:gravity="center_vertical"
+            android:text="@{dateItem.displayDate}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="07 JAN 2014" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtDateDiff"
+            style="@style/AppTextStyle.Date"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/dp8"
+            android:layout_marginRight="@dimen/dp8"
+            android:gravity="center_vertical|end"
+            app:displayDateDiff="@{dateItem.dateDiff}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/txtDate"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="3 days ago" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

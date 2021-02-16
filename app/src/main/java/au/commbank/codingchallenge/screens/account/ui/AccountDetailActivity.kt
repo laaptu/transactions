@@ -13,7 +13,7 @@ class AccountDetailActivity : ViewModelActivity<AccountDetailViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.account_info_item)
+        setContentView(R.layout.date_item)
 //        val toolbar = findViewById<Toolbar>(R.id.toolbar)
 //        initActionBar(
 //                toolBar = toolbar,

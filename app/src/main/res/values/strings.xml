@@ -6,4 +6,10 @@
     <string name="error_fetching_transactions">Error fetching transactions.Try again later.</string>
     <string name="account_balance">Account balance</string>
     <string name="available_funds">Available funds</string>
+
+    <string name="million">%s M</string>
+    <string name="billion">%s B</string>
+    <string name="trillion">%s T</string>
+
+    <string name="today">Today</string>
 </resources>

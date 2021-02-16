@@ -52,9 +52,16 @@ class TransactionItem(
 }
 
 
-sealed class DateDiff {
-    class Day(val days: Long) : DateDiff()
-    class Month(val months: Long) : DateDiff()
-    class Year(val years: Long) : DateDiff()
-    object Invalid : DateDiff()
+sealed class DateDiff(val diff: Long) {
+    class Day(days: Long) : DateDiff(days)
+    class Month(months: Long) : DateDiff(months)
+    class Year(years: Long) : DateDiff(years)
+    object Invalid : DateDiff(-1)
+}
+
+sealed class DisplayAmount(val amount: Float) {
+    class Thousands(amount: Float) : DisplayAmount(amount)
+    class Millions(amount: Float) : DisplayAmount(amount)
+    class Billions(amount: Float) : DisplayAmount(amount)
+    class Trillions(amount: Float) : DisplayAmount(amount)
 }
