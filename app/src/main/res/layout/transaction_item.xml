@@ -48,7 +48,7 @@
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:text="PENDING: Katching TFR saving" />
+            tools:text="PENDING: Katching TFR saving" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

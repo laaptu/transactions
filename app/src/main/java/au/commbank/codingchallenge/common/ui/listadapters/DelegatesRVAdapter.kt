@@ -11,7 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
  * https://github.com/sockeqwe/AdapterDelegates
  */
 
-class DelegatesRVAdapter<T>(listDelegates: List<AdapterDelegate<T>>, diffCallback: DiffUtil.ItemCallback<T>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+open class DelegatesRVAdapter<T>(
+    listDelegates: List<AdapterDelegate<T>>,
+    diffCallback: DiffUtil.ItemCallback<T>
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val delegates: SparseArrayCompat<AdapterDelegate<T>> = SparseArrayCompat()
     private val differ: AsyncListDiffer<T> = AsyncListDiffer(this, diffCallback)
@@ -28,7 +31,7 @@ class DelegatesRVAdapter<T>(listDelegates: List<AdapterDelegate<T>>, diffCallbac
     private fun getItemViewType(items: List<T>, position: Int): Int {
         for (i in 0 until delegates.size()) {
             val delegate = delegates.valueAt(i)
-            if (delegate.isForViewType(items, position)) {
+            if (delegate.isForViewType(items[position])) {
                 return delegates.keyAt(i)
             }
         }
@@ -38,14 +41,14 @@ class DelegatesRVAdapter<T>(listDelegates: List<AdapterDelegate<T>>, diffCallbac
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val delegate: AdapterDelegate<T> = getDelegateForViewType(viewType)
-                ?: throw NullPointerException("No AdapterDelegate added for ViewType $viewType")
+            ?: throw NullPointerException("No AdapterDelegate added for ViewType $viewType")
 
         return delegate.onCreateViewHolder(parent)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val delegate = getDelegateForViewType(holder.itemViewType)
-                ?: throw NullPointerException("No delegate found for item at position = $position for viewType = ${holder.itemViewType}")
+            ?: throw NullPointerException("No delegate found for item at position = $position for viewType = ${holder.itemViewType}")
         delegate.onBindViewHolder(differ.currentList, position, holder)
     }
 
@@ -59,5 +62,7 @@ class DelegatesRVAdapter<T>(listDelegates: List<AdapterDelegate<T>>, diffCallbac
     fun setItems(items: List<T>?) = differ.submitList(items)
 
 }
+
+
 
 

@@ -1,3 +1,5 @@
+@file:Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+
 package au.commbank.codingchallenge.screens.utils
 
 import au.commbank.codingchallenge.config.NetworkConfig
@@ -10,22 +12,22 @@ import java.util.concurrent.TimeUnit
 import kotlin.math.abs
 
 private const val AMOUNT_FORMAT = "$%.2f"
-private val serverDateFormat = SimpleDateFormat(NetworkConfig.dateFormat)
-private val uiDateFormat = SimpleDateFormat("dd MMM yyyy")
+private val serverDateFormat = SimpleDateFormat(NetworkConfig.dateFormat, Locale.US)
+private val uiDateFormat = SimpleDateFormat("dd MMM yyyy", Locale.US)
 
 fun formatAmount(amount: Float): String =
-        if (amount < 0) {
-            "-".plus(AMOUNT_FORMAT.format(abs(amount)))
-        } else {
-            AMOUNT_FORMAT.format(amount)
-        }
+    if (amount < 0) {
+        "-".plus(AMOUNT_FORMAT.format(abs(amount)))
+    } else {
+        AMOUNT_FORMAT.format(amount)
+    }
 
 fun getTimeInMillisFromDate(date: String, defaultReturn: Long): Long =
-        try {
-            serverDateFormat.parse(date)?.time ?: defaultReturn
-        } catch (exception: Exception) {
-            defaultReturn
-        }
+    try {
+        serverDateFormat.parse(date)?.time ?: defaultReturn
+    } catch (exception: Exception) {
+        defaultReturn
+    }
 
 //TODO: need to account for leap year and accurate days in a month
 fun getTimeDiff(date: String): DateDiff {
@@ -52,7 +54,7 @@ fun getTimeDiff(date: String): DateDiff {
 fun getDisplayDate(date: String): String {
     return try {
         val givenDate = serverDateFormat.parse(date)
-        uiDateFormat.format(givenDate)
+        uiDateFormat.format(givenDate).toUpperCase(Locale.ROOT)
     } catch (exception: Exception) {
         date
     }

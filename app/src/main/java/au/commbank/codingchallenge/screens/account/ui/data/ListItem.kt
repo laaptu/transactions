@@ -9,45 +9,45 @@ sealed class ListItem(val id: String) {
         return false
     }
 
-    open fun areContentsSame(other: ListItem): Boolean = equals(other)
+    open infix fun matchesContentWith(other: ListItem): Boolean = equals(other)
 
 }
 
 class AccountInfoItem(
-        id: String,
-        val accountName: String,
-        val accountNumber: String,
-        val availableFunds: Float,
-        val accountBalance: Float
+    id: String,
+    val accountName: String,
+    val accountNumber: String,
+    val availableFunds: Float,
+    val accountBalance: Float
 ) : ListItem(id) {
-    override fun areContentsSame(other: ListItem): Boolean {
+    override fun matchesContentWith(other: ListItem): Boolean {
         return if (other is AccountInfoItem)
             availableFunds matches other.availableFunds &&
                     accountBalance matches other.accountBalance
         else
-            super.areContentsSame(other)
+            super.matchesContentWith(other)
     }
 }
 
 class DateItem(
-        id: String,
-        val displayDate: String,
-        val dateDiff: DateDiff
+    id: String,
+    val displayDate: String,
+    val dateDiff: DateDiff
 ) : ListItem(id)
 
 class TransactionItem(
-        id: String,
-        val date: String,
-        val description: String,
-        val amount: Float,
-        val isPending: Boolean = false,
-        val atmLocationId: String? = null
+    id: String,
+    val date: String,
+    val description: String,
+    val amount: Float,
+    val isPending: Boolean = false,
+    val atmLocationId: String? = null
 ) : ListItem(id) {
-    override fun areContentsSame(other: ListItem): Boolean {
+    override fun matchesContentWith(other: ListItem): Boolean {
         return if (other is TransactionItem)
             isPending == other.isPending
         else
-            super.areContentsSame(other)
+            super.matchesContentWith(other)
     }
 }
 

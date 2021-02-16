@@ -1,5 +1,7 @@
 package au.commbank.codingchallenge.screens.account.ui
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import au.commbank.codingchallenge.R
@@ -10,18 +12,24 @@ import au.commbank.codingchallenge.common.data.Response
 import au.commbank.codingchallenge.common.data.Success
 import au.commbank.codingchallenge.screens.account.data.AccountDetailRepo
 import au.commbank.codingchallenge.screens.account.data.AccountDetails
+import au.commbank.codingchallenge.screens.account.ui.data.ListItem
 import au.commbank.codingchallenge.screens.account.ui.data.mappers.AccountDataMapper
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class AccountDetailViewModel @Inject constructor(private val accountDetailRepo: AccountDetailRepo,
-                                                 private val accountDataMapper: AccountDataMapper,
-                                                 private val logger: Logger) :
-        ViewModel() {
+class AccountDetailViewModel @Inject constructor(
+    private val accountDetailRepo: AccountDetailRepo,
+    private val accountDataMapper: AccountDataMapper,
+    private val logger: Logger
+) :
+    ViewModel() {
 
     companion object {
         private val TAG = AccountDetailViewModel::class.java.simpleName
     }
+
+    private val _accountItems: MutableLiveData<List<ListItem>> = MutableLiveData()
+    val accountItems: LiveData<List<ListItem>> = _accountItems
 
     fun fetchAccountDetail() {
         viewModelScope.launch {
@@ -31,14 +39,18 @@ class AccountDetailViewModel @Inject constructor(private val accountDetailRepo: 
                     if (response.data != null) {
                         handleSuccess(response.data)
                     } else {
-                        notifyError("Response contains invalid data",
-                                InvalidResult,
-                                R.string.error_fetching_transactions)
+                        notifyError(
+                            "Response contains invalid data",
+                            InvalidResult,
+                            R.string.error_fetching_transactions
+                        )
                     }
                 }
-                is Error -> notifyError(response.message,
-                        response.errorType,
-                        R.string.error_fetching_transactions)
+                is Error -> notifyError(
+                    response.message,
+                    response.errorType,
+                    R.string.error_fetching_transactions
+                )
 
             }
         }
@@ -46,6 +58,7 @@ class AccountDetailViewModel @Inject constructor(private val accountDetailRepo: 
 
     private fun handleSuccess(accountDetails: AccountDetails) {
         val accountUIData = accountDataMapper mapToAccountUIData accountDetails
+        _accountItems.value = accountUIData.listItems
     }
 
     private fun notifyError(errorMsg: String, errorType: Int, errorMsgId: Int) {
