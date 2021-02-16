@@ -1,9 +1,7 @@
 package au.commbank.codingchallenge.screens.account.ui
 
-import android.graphics.Typeface
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.StyleSpan
+import android.os.Build
+import android.text.Html
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
@@ -84,19 +82,13 @@ object ViewBindings {
         description: String,
         isPending: Boolean
     ) {
-        if (isPending) {
-            val pendingStr = textView.context.getString(R.string.pending)
-            val len = pendingStr.length
-            val spannableString = SpannableString(pendingStr.plus(" ").plus(description))
-            spannableString.setSpan(
-                StyleSpan(Typeface.BOLD),
-                0, len + 1,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-            textView.text = spannableString
-        } else {
-            textView.text = description
-        }
+        val desc = if (isPending)
+            textView.context.getString(R.string.pending).plus(" ").plus(description)
+        else
+            description
+        textView.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+            Html.fromHtml(desc, Html.FROM_HTML_MODE_LEGACY)
+        else
+            Html.fromHtml(desc)
     }
-
 }
