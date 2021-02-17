@@ -3,7 +3,6 @@
     <string name="account_details">Account details</string>
     <string name="find_us">Find us</string>
 
-    <string name="error_fetching_transactions">Error fetching transactions.Try again later.</string>
     <string name="account_balance">Account balance</string>
     <string name="available_funds">Available funds</string>
 
@@ -13,4 +12,6 @@
 
     <string name="today">Today</string>
     <string name="pending">&lt;b>PENDING:&lt;/b></string>
+
+    <string name="error_fetching_account">Error fetching account details.Try again later!</string>
 </resources>
