@@ -21,7 +21,7 @@ import javax.inject.Inject
 class AccountDetailViewModel @Inject constructor(
     private val accountDetailRepo: AccountDetailRepo,
     private val accountDataMapper: AccountDataMapper,
-    viewStateProvider: ViewStateProvider,
+    vmStateProvider: VMStateProvider,
     private val logger: Logger
 ) :
     ViewModel() {
@@ -30,23 +30,26 @@ class AccountDetailViewModel @Inject constructor(
         private val TAG = AccountDetailViewModel::class.java.simpleName
     }
 
-    private var currViewState: ViewState = viewStateProvider.getInitialViewState()
-    private val _viewState: MutableLiveData<ViewState> = MutableLiveData(currViewState)
-    val viewState: LiveData<ViewState> = _viewState
+    private var currVMState: VMState = vmStateProvider.getInitialViewState()
 
     private val _uiAction: MutableLiveData<Event<UIAction>> = MutableLiveData()
     val uiAction: LiveData<Event<UIAction>> = _uiAction
 
     fun fetchAccountDetail() {
         //this is to be done to prevent multiple calls during screen rotation
-        if (_viewState.value != Initialized)
-            return
-        refreshAccountDetails()
+        if (currVMState == Initialized) {
+            currVMState = Empty
+            refreshAccountDetails()
+        } else {
+            showProgress(false)
+            if (currVMState is DataFetched)
+                displayList((currVMState as DataFetched).accountUIData.listItems)
+        }
     }
 
     fun refreshAccountDetails() {
         viewModelScope.launch {
-            if (_viewState.value is InProgress)
+            if (isUIShowingProgress())
                 return@launch
             showProgress(true)
             val response: Response<AccountDetails> = accountDetailRepo.getAccountDetails()
@@ -73,19 +76,26 @@ class AccountDetailViewModel @Inject constructor(
 
     private fun handleSuccess(accountDetails: AccountDetails) {
         val accountUIData = accountDataMapper mapToAccountUIData accountDetails
-        currViewState = DataFetched(accountUIData)
+        currVMState = DataFetched(accountUIData)
         showProgress(false)
-        _viewState.value = currViewState
+        displayList(accountUIData.listItems)
     }
 
     private fun notifyError(errorMsg: String, errorType: Int, errorMsgId: Int) {
         logger.error(TAG, "Error message = $errorMsg and type = $errorType")
         showProgress(false)
         _uiAction.value = Event(DisplayMsg(errorMsgId))
-        _viewState.value = currViewState
     }
 
     private fun showProgress(showProgress: Boolean) {
-        _viewState.value = InProgress(showProgress)
+        _uiAction.value = Event(ShowProgress(showProgress))
+    }
+
+    private fun isUIShowingProgress(): Boolean = _uiAction.value?.peek().let {
+        it is ShowProgress && it.show
+    }
+
+    private fun displayList(items: List<ListItem>) {
+        _uiAction.value = Event(DisplayList(items))
     }
 }
