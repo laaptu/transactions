@@ -11,6 +11,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parentLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/grey"
@@ -18,7 +19,8 @@
         android:paddingLeft="@dimen/dp12"
         android:paddingTop="@dimen/dp17"
         android:paddingRight="@dimen/dp12"
-        android:paddingBottom="@dimen/dp17">
+        android:paddingBottom="@dimen/dp17"
+        app:atmLocationClick="@{transactionItem.atmLocationId}">
 
 
         <com.google.android.material.textview.MaterialTextView
@@ -26,6 +28,8 @@
             style="@style/AppTextStyle.MidSizedBlack.Bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
             android:maxLines="1"
             app:displayAmount="@{transactionItem.amount}"
             app:layout_constraintEnd_toEndOf="parent"

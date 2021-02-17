@@ -8,9 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import au.commbank.codingchallenge.R
 import au.commbank.codingchallenge.common.ui.ViewModelActivity
+import au.commbank.codingchallenge.common.ui.events.EventBus
 import au.commbank.codingchallenge.common.ui.events.EventObserver
 import au.commbank.codingchallenge.databinding.ActivityAccountDetailBinding
 import au.commbank.codingchallenge.screens.account.ui.adapters.AccountAdapter
+import au.commbank.codingchallenge.screens.account.ui.data.AtmLocationClick
 import au.commbank.codingchallenge.screens.account.ui.data.DisplayList
 import au.commbank.codingchallenge.screens.account.ui.data.DisplayMsg
 import au.commbank.codingchallenge.screens.account.ui.data.ShowProgress
@@ -26,7 +28,7 @@ class AccountDetailActivity : ViewModelActivity<AccountDetailViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViews()
-        listenToViewModelEvents()
+        listenToViewEvents()
         fetchAccountDetails()
     }
 
@@ -54,7 +56,7 @@ class AccountDetailActivity : ViewModelActivity<AccountDetailViewModel>() {
         recyclerView.adapter = accountAdapter
     }
 
-    private fun listenToViewModelEvents() {
+    private fun listenToViewEvents() {
 
         viewModel.uiAction.observe(this, EventObserver { uiAction ->
             when (uiAction) {
@@ -62,6 +64,11 @@ class AccountDetailActivity : ViewModelActivity<AccountDetailViewModel>() {
                 is DisplayList -> accountAdapter.setItems(uiAction.items)
                 is ShowProgress -> showProgress(uiAction.show, binding.refreshLayout)
             }
+        })
+
+        EventBus.register(this, EventObserver {
+            if (it is AtmLocationClick)
+                println("Atm location = ${it.atmLocationId}")
         })
     }
 

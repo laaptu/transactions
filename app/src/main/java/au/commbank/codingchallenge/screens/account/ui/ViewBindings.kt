@@ -2,10 +2,13 @@ package au.commbank.codingchallenge.screens.account.ui
 
 import android.os.Build
 import android.text.Html
+import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import au.commbank.codingchallenge.R
+import au.commbank.codingchallenge.common.ui.events.EventBus
+import au.commbank.codingchallenge.screens.account.ui.data.AtmLocationClick
 import au.commbank.codingchallenge.screens.account.ui.data.DateDiff
 import au.commbank.codingchallenge.screens.account.ui.data.DisplayAmount
 import au.commbank.codingchallenge.screens.account.ui.data.TransactionItem
@@ -90,5 +93,21 @@ object ViewBindings {
             Html.fromHtml(desc, Html.FROM_HTML_MODE_LEGACY)
         else
             Html.fromHtml(desc)
+    }
+
+    @JvmStatic
+    @BindingAdapter("atmLocationClick")
+    fun onAtmLocationClick(view: View, atmLocationId: String?) {
+        if (atmLocationId != null) {
+            view.isEnabled = true
+            view.isClickable = true
+            view.setOnClickListener {
+                EventBus.postEvent(AtmLocationClick(atmLocationId))
+            }
+        } else {
+            view.isEnabled = false
+            view.isClickable = false
+            view.setOnClickListener(null)
+        }
     }
 }
