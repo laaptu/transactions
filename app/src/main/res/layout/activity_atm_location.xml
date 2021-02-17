@@ -4,9 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/appBar"
-        layout="@layout/app_bar" />
+    <include layout="@layout/app_bar" />
 
     <fragment
         android:id="@+id/mapFragment"

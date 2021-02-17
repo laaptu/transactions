@@ -32,7 +32,7 @@ class AtmLocationActivity : BaseActivity(), OnMapReadyCallback {
     lateinit var location: Location
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_account_detail)
+        setContentView(R.layout.activity_atm_location)
 
         val passedLocation: Location? = getLocationFromIntent(intent)
         if (passedLocation == null) {
@@ -55,7 +55,7 @@ class AtmLocationActivity : BaseActivity(), OnMapReadyCallback {
             titleText = getString(R.string.find_us),
             homeAsUpEnabled = true
         )
-        (supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment)
+        (supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment).apply { }
             .getMapAsync(this)
     }
 
@@ -67,7 +67,11 @@ class AtmLocationActivity : BaseActivity(), OnMapReadyCallback {
                     .position(latLng)
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker))
             )
-            moveCamera(CameraUpdateFactory.newLatLng(latLng))
+            with(uiSettings) {
+                isZoomControlsEnabled = true
+            }
+            moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13f))
+
         }
     }
 }

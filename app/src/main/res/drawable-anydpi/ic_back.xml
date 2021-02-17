@@ -6,10 +6,10 @@
     android:tint="#171113"
     android:alpha="0.8"
     android:autoMirrored="true">
-  <group android:scaleX="1.0909091"
-      android:scaleY="1.0909091"
-      android:translateX="5.4545455"
-      android:translateY="-1.0909091">
+  <group android:scaleX="0.6315789"
+      android:scaleY="0.6315789"
+      android:translateX="8.210526"
+      android:translateY="4.4210525">
     <path
         android:fillColor="@android:color/white"
         android:pathData="M11.67,3.87L9.9,2.1 0,12l9.9,9.9 1.77,-1.77L3.54,12z"/>
