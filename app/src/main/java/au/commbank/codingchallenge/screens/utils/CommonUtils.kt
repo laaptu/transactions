@@ -71,6 +71,38 @@ fun getDisplayAmount(amount: Float): DisplayAmount {
     }
 }
 
+//this is just a rough algorithm, the date difference needs to be more accurate
 fun getBiWeeklySpendingProjection(sortedSpendingByDate: List<Spending>): Float {
-    return 0f
+    var totalSpending = 0f
+    val validSpending = sortedSpendingByDate.filter {
+        totalSpending += it.amount
+        it.amount > 0
+    }
+    if (validSpending.size == 1) {
+        return totalSpending / 2f
+    }
+    val endTimeInMillis = getTimeInMillis(
+        validSpending.first().date,
+        validSpending.first().dateFormat
+    )
+    val startTimeInMillis = getTimeInMillis(
+        validSpending.last().date,
+        validSpending.last().dateFormat
+    )
+
+    val diffInMillis = abs(endTimeInMillis - startTimeInMillis)
+    val days: Long = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS)
+    if (days <= 30)
+        return totalSpending / 2f
+    val mul = days / 15
+    return (totalSpending / mul)
+}
+
+private fun getTimeInMillis(dateVal: String, format: String): Long {
+    return try {
+        val dateFormat = SimpleDateFormat(format, Locale.US)
+        dateFormat.parse(dateVal).time
+    } catch (exception: Exception) {
+        0
+    }
 }
