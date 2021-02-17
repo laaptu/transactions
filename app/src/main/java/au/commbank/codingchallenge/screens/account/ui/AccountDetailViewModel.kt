@@ -74,6 +74,14 @@ class AccountDetailViewModel @Inject constructor(
         }
     }
 
+    fun onAtmLocationClick(atmLocationId: String) {
+        if (currVMState is DataFetched && !isUIShowingProgress()) {
+            (currVMState as DataFetched).accountUIData.atmLocMap[atmLocationId]?.let {
+                _uiAction.value = Event(Navigate(it.location))
+            }
+        }
+    }
+
     private fun handleSuccess(accountDetails: AccountDetails) {
         val accountUIData = accountDataMapper mapToAccountUIData accountDetails
         currVMState = DataFetched(accountUIData)
@@ -98,4 +106,6 @@ class AccountDetailViewModel @Inject constructor(
     private fun displayList(items: List<ListItem>) {
         _uiAction.value = Event(DisplayList(items))
     }
+
+
 }

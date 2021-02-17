@@ -17,6 +17,7 @@ object Version {
         const val constraintLayoutVersion = "2.0.4"
         const val androidxActivity = "1.1.0"
         const val swipeRefreshLayout = "1.1.0"
+        const val googleMaps = "3.1.0-beta"
     }
 
     //testlib version
@@ -63,6 +64,9 @@ object Libs {
             "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Version.coroutines}"
         const val swipeRefreshLayout =
             "androidx.swiperefreshlayout:swiperefreshlayout:${Version.Android.swipeRefreshLayout}"
+        const val googleMaps =
+            "com.google.android.libraries.maps:maps:${Version.Android.googleMaps}"
+
     }
 }
 

@@ -12,10 +12,8 @@ import au.commbank.codingchallenge.common.ui.events.EventBus
 import au.commbank.codingchallenge.common.ui.events.EventObserver
 import au.commbank.codingchallenge.databinding.ActivityAccountDetailBinding
 import au.commbank.codingchallenge.screens.account.ui.adapters.AccountAdapter
-import au.commbank.codingchallenge.screens.account.ui.data.AtmLocationClick
-import au.commbank.codingchallenge.screens.account.ui.data.DisplayList
-import au.commbank.codingchallenge.screens.account.ui.data.DisplayMsg
-import au.commbank.codingchallenge.screens.account.ui.data.ShowProgress
+import au.commbank.codingchallenge.screens.account.ui.data.*
+import au.commbank.codingchallenge.screens.location.AtmLocationActivity
 import com.google.android.material.snackbar.Snackbar
 
 class AccountDetailActivity : ViewModelActivity<AccountDetailViewModel>() {
@@ -63,12 +61,18 @@ class AccountDetailActivity : ViewModelActivity<AccountDetailViewModel>() {
                 is DisplayMsg -> showInfoMsg(uiAction.msgResId)
                 is DisplayList -> accountAdapter.setItems(uiAction.items)
                 is ShowProgress -> showProgress(uiAction.show, binding.refreshLayout)
+                is Navigate -> startActivity(
+                    AtmLocationActivity.getLaunchIntent(
+                        this,
+                        uiAction.location
+                    )
+                )
             }
         })
 
         EventBus.register(this, EventObserver {
             if (it is AtmLocationClick)
-                println("Atm location = ${it.atmLocationId}")
+                viewModel.onAtmLocationClick(it.atmLocationId)
         })
     }
 

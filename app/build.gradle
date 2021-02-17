@@ -7,6 +7,7 @@ plugins {
     id 'kotlin-android'
     id 'de.mannodermaus.android-junit5'
     id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
 }
 
 android {
@@ -18,9 +19,18 @@ android {
         targetSdkVersion Config.targetSdkVersion
         versionCode Config.versionCode
         versionName Config.versionName
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+
+        Properties properties = new Properties()
+        if (rootProject.file("local.properties").exists()) {
+            properties.load(rootProject.file("local.properties").newDataInputStream())
+        }
+
+        // Inject the Maps API key into the manifest
+        manifestPlaceholders = [mapsApiKey: properties.getProperty("MAPS_API_KEY", "")]
     }
 
     buildTypes {
@@ -41,6 +51,10 @@ android {
         dataBinding true
     }
 
+    androidExtensions {
+        features = ["parcelize"]
+    }
+
     testOptions {
         junitPlatform {
             configurationParameter "junit.jupiter.testinstance.lifecycle.default", "per_class"
@@ -59,6 +73,7 @@ dependencies {
     implementation Libs.Android.liveData
     implementation Libs.Android.coroutines
     implementation Libs.Android.swipeRefreshLayout
+    implementation Libs.Android.googleMaps
 
     //Dagger
     implementation Libs.dagger

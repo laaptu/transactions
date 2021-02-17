@@ -14,4 +14,5 @@
     <string name="pending">&lt;b>PENDING:&lt;/b></string>
 
     <string name="error_fetching_account">Error fetching account details.Try again later!</string>
+    <string name="info_pass_valid_location">Please pass a valid location to view on the map!</string>
 </resources>

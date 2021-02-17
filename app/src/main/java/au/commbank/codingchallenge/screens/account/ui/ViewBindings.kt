@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package au.commbank.codingchallenge.screens.account.ui
 
 import android.os.Build
