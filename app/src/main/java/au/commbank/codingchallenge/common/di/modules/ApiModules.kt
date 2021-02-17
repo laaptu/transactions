@@ -11,5 +11,5 @@ class ApiModule {
     @Provides
     @Singleton
     fun getAccountApiService(retrofit: Retrofit): AccountApiService =
-            retrofit.create(AccountApiService::class.java)
+        retrofit.create(AccountApiService::class.java)
 }

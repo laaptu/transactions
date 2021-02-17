@@ -17,8 +17,8 @@ class TransactionMapper @Inject constructor(private val logger: Logger) : Compar
     }
 
     fun merge(
-            transactions: List<Transaction>,
-            pendingTransactions: List<Transaction>
+        transactions: List<Transaction>,
+        pendingTransactions: List<Transaction>
     ): TreeMap<String, MutableList<TransactionItem>> {
         val map: TreeMap<String, MutableList<TransactionItem>> = TreeMap(this)
 
@@ -29,9 +29,9 @@ class TransactionMapper @Inject constructor(private val logger: Logger) : Compar
     }
 
     private fun addTransactionsToMap(
-            transactions: List<Transaction>,
-            map: TreeMap<String, MutableList<TransactionItem>>,
-            isPendingTransaction: Boolean = false
+        transactions: List<Transaction>,
+        map: TreeMap<String, MutableList<TransactionItem>>,
+        isPendingTransaction: Boolean = false
     ) {
         transactions.forEach { transaction ->
             val transactionItem = mapTransactionToTransactionItem(transaction, isPendingTransaction)
@@ -43,27 +43,27 @@ class TransactionMapper @Inject constructor(private val logger: Logger) : Compar
     }
 
     private fun mapTransactionToTransactionItem(
-            transaction: Transaction,
-            isPending: Boolean = false
+        transaction: Transaction,
+        isPending: Boolean = false
     ): TransactionItem =
-            with(transaction) {
-                TransactionItem(
-                        id = id,
-                        date = effectiveDate,
-                        description = description,
-                        amount = amount,
-                        isPending = isPending,
-                        atmLocationId = atmId
-                )
-            }
+        with(transaction) {
+            TransactionItem(
+                id = id,
+                date = effectiveDate,
+                description = description,
+                amount = amount,
+                isPending = isPending,
+                atmLocationId = atmId
+            )
+        }
 
     override fun compare(date1: String, date2: String): Int {
         val timeInMillis1 = getTimeInMillisFromDate(date1, INVALID_TIME)
         val timeInMillis2 = getTimeInMillisFromDate(date2, INVALID_TIME)
         if (timeInMillis1 == INVALID_TIME || timeInMillis2 == INVALID_TIME) {
             logger.error(
-                    TAG,
-                    """
+                TAG,
+                """
                 There is issue with date format for either $date1 or $date2,
                 will create issues in ordering
                 """.trimIndent()

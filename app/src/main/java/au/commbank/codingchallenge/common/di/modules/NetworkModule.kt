@@ -24,19 +24,19 @@ class NetworkModule {
 
     @Provides
     fun getOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
-            OkHttpClient.Builder()
-                    .addInterceptor(httpLoggingInterceptor)
-                    .connectTimeout(NetworkConfig.connectionTimeOutInSec, TimeUnit.SECONDS)
-                    .readTimeout(NetworkConfig.readTimeOutInSec, TimeUnit.SECONDS)
-                    .writeTimeout(NetworkConfig.writeTimeOutInSec, TimeUnit.SECONDS)
-                    .build()
+        OkHttpClient.Builder()
+            .addInterceptor(httpLoggingInterceptor)
+            .connectTimeout(NetworkConfig.connectionTimeOutInSec, TimeUnit.SECONDS)
+            .readTimeout(NetworkConfig.readTimeOutInSec, TimeUnit.SECONDS)
+            .writeTimeout(NetworkConfig.writeTimeOutInSec, TimeUnit.SECONDS)
+            .build()
 
     @Provides
     @Singleton
     fun getRetrofit(okHttpClient: OkHttpClient): Retrofit =
-            Retrofit.Builder()
-                    .baseUrl(NetworkConfig.apiBaseUrl)
-                    .client(okHttpClient)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
+        Retrofit.Builder()
+            .baseUrl(NetworkConfig.apiBaseUrl)
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
 }

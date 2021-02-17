@@ -7,8 +7,10 @@ import au.commbank.codingchallenge.common.data.Response
 import au.commbank.codingchallenge.common.data.Success
 import javax.inject.Inject
 
-class AccountDetailRepo @Inject constructor(private val accountApiService: AccountApiService,
-                                            private val logger: Logger) {
+class AccountDetailRepo @Inject constructor(
+    private val accountApiService: AccountApiService,
+    private val logger: Logger
+) {
     companion object {
         private val TAG = AccountDetailRepo::class.java.simpleName
     }
@@ -17,7 +19,8 @@ class AccountDetailRepo @Inject constructor(private val accountApiService: Accou
         return try {
             Success(accountApiService.getAccountDetails())
         } catch (exception: Exception) {
-            val errorMsg = "Error fetching account details due to: $exception & \n${exception.message}"
+            val errorMsg =
+                "Error fetching account details due to: $exception & \n${exception.message}"
             logger.error(TAG, errorMsg)
             Error(errorMsg, ErrorType.General)
         }
