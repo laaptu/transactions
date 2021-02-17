@@ -17,7 +17,7 @@ class AccountAdapter : DelegatesRVAdapter<ListItem>(
 
 object DiffCallback : DiffUtil.ItemCallback<ListItem>() {
     override fun areItemsTheSame(oldItem: ListItem, newItem: ListItem): Boolean =
-        oldItem == newItem
+        oldItem isSame newItem
 
     override fun areContentsTheSame(oldItem: ListItem, newItem: ListItem): Boolean =
         oldItem matchesContentWith newItem

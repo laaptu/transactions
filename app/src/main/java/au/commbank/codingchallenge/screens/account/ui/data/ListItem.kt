@@ -3,14 +3,9 @@ package au.commbank.codingchallenge.screens.account.ui.data
 import au.commbank.codingchallenge.screens.utils.matches
 
 sealed class ListItem(val id: String) {
-    override fun equals(other: Any?): Boolean {
-        if (other is ListItem)
-            other.id == id
-        return false
-    }
 
-    open infix fun matchesContentWith(other: ListItem): Boolean = equals(other)
-
+    open infix fun isSame(other: ListItem): Boolean = (id == other.id)
+    open infix fun matchesContentWith(other: ListItem): Boolean = isSame(other)
 }
 
 class AccountInfoItem(
