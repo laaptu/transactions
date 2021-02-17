@@ -92,6 +92,7 @@ dependencies {
     testImplementation TestLibs.junit5Params
     testImplementation TestLibs.mockitoCore
     testImplementation TestLibs.mockitoInline
+    testImplementation TestLibs.mockitoKotlin
     testImplementation TestLibs.coroutine
     testImplementation TestLibs.Android.arch
     testRuntimeOnly TestLibs.junit5Engine
